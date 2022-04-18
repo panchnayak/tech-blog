@@ -1,5 +1,5 @@
 
-## Installing Rancher on k3s V1
+## Installing Rancher on k3s - V1
 
 Here I am using VMware Fusion on my MAcbookPro to create and manage the VMs, you can use any virtualization software for your laptop or desktop.
 
@@ -114,6 +114,10 @@ Now set "your own password" for the rancher server as shown
 Login to rancher server with "admin" as the username and "your-own-password", you should be able to login successfully.
 
 ![](/rancher/images/rancher-login-success.jpg)
+
+Now you can create more downstream kubernets clusters using rancher.
+
+I ll update this page again.Stay tuned.
 
 ## Uninstall k3s singlenode kubernetes cluster from the VM
 

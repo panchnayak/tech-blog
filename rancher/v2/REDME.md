@@ -1,4 +1,4 @@
-# Installing Rancher on k3s V2
+# Installing Rancher on k3s - V2
 
 Here I am using VMware Fusion on my MAcbookPro to create and manage the VMs, you can use any virtualization software for your laptop or desktop.
 
