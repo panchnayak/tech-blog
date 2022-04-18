@@ -60,6 +60,13 @@ sudo mv kubectl /usr/local/bin
 Install k3s server without the traefik ingress controller, we are going to install and use nginx ingress controller latter.
 ```
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--no-deploy traefik" sh -s -
+
+or with external postgres DB as follows
+
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--no-deploy traefik" sh -s - --datastore-endpoint="postgres://postgres:Abcd@1234@192.168.1.92:5432/k3s"
+
+
+
 ```
 Get the Kubernetes cluster details
 ```
@@ -93,11 +100,11 @@ ip a
 sudo cat /var/lib/rancher/k3s/server/node-token
 
 pnayak@rancher-server-1:~/tech-blog/rancher/v1$ sudo cat /var/lib/rancher/k3s/server/node-token
-K1083efac7e33d2e594ca2756b121019986c795b52337bb4b86e9ed6d5d9eb3c683::server:8e2aff8512d6a673a31c0686f0a2eaf3
+K10ae766aee26c6e3e645a4f1abf7e620ea43235e3a1b5c3f2fbc2958ec87f3aecc::server:e3b1f376bef51250d8b019971a75b96d
 ```
 Excute the following commands on the worker node VM terminal
 ```
-curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.103:6443 K3S_TOKEN="K1083efac7e33d2e594ca2756b121019986c795b52337bb4b86e9ed6d5d9eb3c683::server:8e2aff8512d6a673a31c0686f0a2eaf3" sh -
+curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.103:6443 K3S_TOKEN="K10ae766aee26c6e3e645a4f1abf7e620ea43235e3a1b5c3f2fbc2958ec87f3aecc::server:e3b1f376bef51250d8b019971a75b96d" sh -
 
 
 pnayak@rancher-worker-1:~$ curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.103:6443 K3S_TOKEN="K1083efac7e33d2e594ca2756b121019986c795b52337bb4b86e9ed6d5d9eb3c683::server:8e2aff8512d6a673a31c0686f0a2eaf3" sh -
