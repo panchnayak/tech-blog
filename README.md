@@ -10,7 +10,7 @@ apt install -y cockpit
 ```
 Access the VM web Interfase using the http//"ip-address":9090
 
-![](cockpit.jpg?raw=true)
+![](cockpit.jpg)
 
 ## Setting DNS for the VM
 
@@ -20,7 +20,7 @@ You can create a new NS record which points to "ns-aws.sslip.io." , this will ba
 
 IP_ADDRESS.bigopencloud.pnayak.com
 
-![](mydns.jpg?raw=true)
+![](mydns.jpg)
 
 ## Install HELM
 ```
@@ -33,8 +33,9 @@ chmod 700 get_helm.sh
 Download and install kubectl the Kubernetes CLI with whom you can communicate with Kubernetes Cluster
 
 ```
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"chmod +x kubectl
-mv kubectl /usr/local/bin
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin
 ```
 
 ## Install k3s, the lightweight Kubernetes
@@ -42,6 +43,21 @@ mv kubectl /usr/local/bin
 Install k3s server without the traefik ingress controller, we are going to install and use nginx ingress controller latter.
 ```
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--no-deploy traefik" sh -s -
+```
+Get the Kubernetes cluster details
+```
+sudo k3s kubectl get nodes
+sudo k3s kubectl describe all
+```
+
+If you dont want to excute the "k3s kubectl" and use only kubectl to get communicate to the cluster do the following
+```
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown pnayak ~/.kube/config
+```
+To tesrt the config simple excute
+```
+kubectl get nodes
 ```
 
 ## Install Rancher on k3s
