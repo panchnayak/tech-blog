@@ -1,6 +1,5 @@
-# My Technology Learning and Blog
 
-## Installing Rancher on k3s
+## Installing Rancher on k3s V1
 
 Here I am using VMware Fusion on my MAcbookPro to create and manage the VMs, you can use any virtualization software for your laptop or desktop.
 
@@ -67,14 +66,17 @@ If you dont want to excute the "k3s kubectl" and use only kubectl to get communi
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 sudo chown pnayak ~/.kube/config
 ```
-To tesrt the config simple excute
+To test the config simple excute
 ```
 kubectl get nodes
 ```
 
 ## Install Rancher on k3s
 
-Excute the shell script
+We will install rancher and the required components by copying some formatted yaml files provided here to the /var/lib/rancher/k3s/server/manifests/ directory, in the k3s server, which tells k3s to set up the components we need (nginx-ingress, cert-manager, and rancher). These files are referred to as helm chart CRDs.
+
+Excute the given shell script in the repository.This will ask you to enter the DNS name for the rancher server. Enter the DNS name for the server as YOUR_VM_IP_ADDRESS.bigopencloud.pnayak.com or any other DNS name you want to give and the rest ll be done by the script.
+
 ```
 ./rancher/install-rancher.sh
 ```
@@ -105,11 +107,11 @@ Copy the pawword and paste it on the browser as the bootstrap password
 pnayak@rancher-server:~$ kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'
 6gp5fpqk9b7ffjlr2zd446v5b5gjv4vrztwz5bcjdrzpv8jq59f459
 ```
-Now se your own password for the rancher server as shown 
+Now set "your own password" for the rancher server as shown 
 
 ![](images/rancher-password.jpg)
 
-Login to rancher server with admin as the username and your password, you should be able to login successfully.
+Login to rancher server with "admin" as the username and "your-own-password", you should be able to login successfully.
 
 ![](images/rancher-login-success.jpg)
 
