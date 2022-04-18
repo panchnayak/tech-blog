@@ -1,11 +1,19 @@
 
-## Installing Rancher on k3s - V1
+# Installing Rancher on k3s - V1
 
-Here I am using VMware Fusion on my MAcbookPro to create and manage the VMs, you can use any virtualization software like VirtualBox for your laptop or desktop.
+### In the First Version of this tutorial I ll prepare a k3s Lightweight Kubernetes cluster and then install Rancher server on this kubernetes cluster
+
+K3s is a lightweight, single executable file, which is less tahn 100MB from Rancher now owned by SUSE for creating a CNCF compliant, Production ready kubernets cluster.
+
+To know more about k3s visit https://k3s.io/
+
+Here I am using VMware Fusion on my MacbookPro to create and manage the VMs, you can use any virtualization software like VirtualBox for your laptop or desktop.
 
 ![](/rancher/images/vmware-fusion-vm.jpg)
 
-Create a new VM or Clone your existing "CentOS 7" or "Ubuntu 20" VM on VirtualBox , Run the VM and Update the OS packages, you can install cockpit to update and install packages.
+* I ll not explain how to create the VM on VirtualBox of VMware workstation here.
+
+Create a new VM or Clone your existing "CentOS 7" or "Ubuntu 20" VM on VirtualBox,Vmware workstation or Vmware Fusion , Run the VM and Update the OS packages, you can install cockpit to update and install packages using web console for the VM
 
 For CentOS-7
 ```
@@ -21,7 +29,7 @@ sudo apt install -y cockpit
 ```
 Take a snapshot of the VM at this point, so that if you do anything wrong you can restore the state of the VM to this point.
 
-Access the VM web Interfase using the http//"ip-address":9090
+Access the VM web Interfase using the http//IP_ADDRESS:9090
 
 ![](/rancher/images/cockpit.jpg)
 
