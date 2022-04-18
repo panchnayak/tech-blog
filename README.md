@@ -111,7 +111,7 @@ Now se your own password for the rancher server as shown
 
 Login to rancher server with admin as the username and your password, you should be able to login successfully.
 
-![](images//rancher-login.jpg)
+![](images/rancher-login-success.jpg)
 
 ## Uninstall k3s singlenode kubernetes cluster from the VM
 
