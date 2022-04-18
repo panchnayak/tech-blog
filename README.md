@@ -63,18 +63,31 @@ kubectl get nodes
 ## Install Rancher on k3s
 
 Excute the shell script
-
 ```
 ./rancher/install-rancher.sh
 ```
-
-Now wait for the Rancher server to be up and running
-
+Check the status of the pods
 ```
-sudo kubectl get pods --all-namespaces | grep helm
+kubectl get pods --all-namespaces | grep helm
+
+pnayak@rancher-server:~$ kubectl get pods --all-namespaces | grep helm
+cert-manager                helm-install-cert-manager--1-g9k9k        0/1     Completed          0             16m
+cattle-system               helm-operation-dhxsx                      0/2     Completed          0             14m
+cattle-system               helm-operation-nx54x                      0/2     Completed          0             14m
+kube-system                 helm-install-ingress-nginx--1-7762k       0/1     Completed          4             16m
+cattle-system               helm-operation-dhr9k                      0/2     Completed          0             14m
+cattle-system               helm-install-rancher--1-wq9w7             0/1     CrashLoopBackOff   6 (53s ago)   7m1s
+```
+
+Wait for the Rancher server to be up and running,now the the following url on your local the browser
+https://IP_ADDRESS.bigopencloud.pnayak.com
+
+![](rancher-login-page.jpg)
+
+Get the bootstrap password by excuting the following
+```
 sudo kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'
 ```
-
 ## Uninstall k3s singlenode kubernetes cluster from the VM
 
 Igf you need to uninsatll the k3s Server from the VM you can do so just excuting the following command
