@@ -3,7 +3,7 @@
 
 Here I am using VMware Fusion on my MAcbookPro to create and manage the VMs, you can use any virtualization software for your laptop or desktop.
 
-![](images/vmware-fusion-vm.jpg)
+![](rancher/images/vmware-fusion-vm.jpg)
 
 Clone your existing "CentOS 7" or "Ubuntu 20" VM on VirtualBox , Run the VM and Update the OS packages, you can install cockpit to update and install packages.
 
@@ -21,7 +21,7 @@ sudo apt install -y cockpit
 ```
 Access the VM web Interfase using the http//"ip-address":9090
 
-![](images/cockpit.jpg)
+![](rancher/images/cockpit.jpg)
 
 ## Setting DNS for the VM
 
@@ -31,7 +31,7 @@ You can create a new NS record which points to "ns-aws.sslip.io." , this will ba
 
 IP_ADDRESS.bigopencloud.pnayak.com
 
-![](iamges/mydns.jpg)
+![](rancher/iamges/mydns.jpg)
 
 ## Install HELM
 ```
@@ -78,7 +78,7 @@ We will install rancher and the required components by copying some formatted ya
 Excute the given shell script in the repository.This will ask you to enter the DNS name for the rancher server. Enter the DNS name for the server as YOUR_VM_IP_ADDRESS.bigopencloud.pnayak.com or any other DNS name you want to give and the rest ll be done by the script.
 
 ```
-./rancher/install-rancher.sh
+./rancher/v1/install-rancher.sh
 ```
 Check the status of the pods
 ```
@@ -96,7 +96,7 @@ cattle-system               helm-install-rancher--1-wq9w7             0/1     Cr
 Wait for the Rancher server to be up and running,now the the following url on your local the browser
 https://IP_ADDRESS.bigopencloud.pnayak.com
 
-![](images/rancher-login-page.jpg)
+![](rancher/images/rancher-login-page.jpg)
 
 Get the bootstrap password by excuting the following
 ```
@@ -109,11 +109,11 @@ pnayak@rancher-server:~$ kubectl get secret --namespace cattle-system bootstrap-
 ```
 Now set "your own password" for the rancher server as shown 
 
-![](images/rancher-password.jpg)
+![](rancher/images/rancher-password.jpg)
 
 Login to rancher server with "admin" as the username and "your-own-password", you should be able to login successfully.
 
-![](images/rancher-login-success.jpg)
+![](rancher/images/rancher-login-success.jpg)
 
 ## Uninstall k3s singlenode kubernetes cluster from the VM
 
