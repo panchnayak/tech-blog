@@ -2,8 +2,11 @@
 
 ## Installing Rancher on k3s
 
-Clone existing "CentOS 7" or "Ubuntu 20" VM on VirtualBox , Run the VM and Update the OS packages, you can install cockpit to update and install packages
+Here I am using VMware Fusion on my MAcbookPro to create and manage the VMs, you can use any virtualization software for your laptop or desktop.
 
+![](vmware-fusion-vm.jpg)
+
+Clone your existing "CentOS 7" or "Ubuntu 20" VM on VirtualBox , Run the VM and Update the OS packages, you can install cockpit to update and install packages.
 
 For CentOS 7
 ```
@@ -105,6 +108,10 @@ pnayak@rancher-server:~$ kubectl get secret --namespace cattle-system bootstrap-
 Now se your own password for the rancher server as shown 
 
 ![](rancher-password.jpg)
+
+Login to rancher server with admin as the username and your password, you should be able to login successfully.
+
+![](rancher-login.jpg)
 
 ## Uninstall k3s singlenode kubernetes cluster from the VM
 
