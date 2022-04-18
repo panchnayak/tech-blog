@@ -25,9 +25,13 @@ Access the VM web Interfase using the http//"ip-address":9090
 
 ![](/rancher/images/cockpit.jpg)
 
+## Clone this repository
+
+git clone https://github.com/panchnayak/tech-blog.git
+
 ## Setting DNS for the VM
 
-setup your DNS record for your domain
+Setup your DNS record for your domain
 
 You can create a new NS record which points to "ns-aws.sslip.io." , this will bassically return the IP adress as the domain name. like if you try to get the domain name 192.168.1.100.bigopencloud.pnayak.com, it ll return you the IP address 192.168.1.100.
 
@@ -41,7 +45,7 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scrip
 chmod 700 get_helm.sh
 ./get_helm.sh
 ```
-## Install kubernetes CLI ubectl
+## Install kubernetes CLI kubectl
 
 Download and install kubectl the Kubernetes CLI with whom you can communicate with Kubernetes Cluster
 
@@ -72,6 +76,7 @@ To test the config simple excute
 ```
 kubectl get nodes
 ```
+
 
 ## Install Rancher on k3s
 

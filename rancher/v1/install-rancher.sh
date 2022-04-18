@@ -28,15 +28,26 @@ kubectl create namespace cattle-system
 kubectl label namespace cert-manager certmanager.k8s.io/disable-validation=true
 
 #Install Nginx Ingress
-
 sudo cp ingress-nginx.yaml /var/lib/rancher/k3s/server/manifests/ingress-nginx.yaml
 
-
 #Install Cert-Manager
-
 sudo cp cert-manager.yaml /var/lib/rancher/k3s/server/manifests/cert-manager.yaml
-
-
 #Install Rancher
+cat > rancher.yaml <<EOF
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: rancher
+  namespace: cattle-system
+spec:
+  repo: https://releases.rancher.com/server-charts/latest
+  chart: rancher
+  targetNamespace: cattle-system
+  valuesContent: |
+    replicas: 1
+    hostname: $rancherHostName
+EOF
 
 sudo cp rancher.yaml /var/lib/rancher/k3s/server/manifests/rancher.yaml
+
+
