@@ -71,12 +71,70 @@ If you dont want to excute the "k3s kubectl" and use only kubectl to get communi
 ```
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 sudo chown pnayak ~/.kube/config
+
+pnayak@rancher-server-1:~/tech-blog/rancher/v1$ sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+pnayak@rancher-server-1:~/tech-blog/rancher/v1$ cd
+pnayak@rancher-server-1:~$ sudo chown pnayak ~/.kube/config
+pnayak@rancher-server-1:~$ kubectl get nodes
+NAME               STATUS   ROLES                  AGE     VERSION
+rancher-server-1   Ready    control-plane,master   13m     v1.22.7+k3s1
 ```
 To test the config simple excute
 ```
 kubectl get nodes
 ```
+## Install a worker node to the master node
 
+Create or clone another VM, Prepare it as a Worker node.I cloned the master VM.
+
+Get the masternode IP and token from the master node
+```
+ip a
+sudo cat /var/lib/rancher/k3s/server/node-token
+
+pnayak@rancher-server-1:~/tech-blog/rancher/v1$ sudo cat /var/lib/rancher/k3s/server/node-token
+K1083efac7e33d2e594ca2756b121019986c795b52337bb4b86e9ed6d5d9eb3c683::server:8e2aff8512d6a673a31c0686f0a2eaf3
+```
+Excute the following commands on the worker node VM terminal
+```
+curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.103:6443 K3S_TOKEN="K1083efac7e33d2e594ca2756b121019986c795b52337bb4b86e9ed6d5d9eb3c683::server:8e2aff8512d6a673a31c0686f0a2eaf3" sh -
+
+
+pnayak@rancher-worker-1:~$ curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.103:6443 K3S_TOKEN="K1083efac7e33d2e594ca2756b121019986c795b52337bb4b86e9ed6d5d9eb3c683::server:8e2aff8512d6a673a31c0686f0a2eaf3" sh -
+[sudo] password for pnayak:
+[INFO]  Finding release for channel stable
+[INFO]  Using v1.22.7+k3s1 as release
+[INFO]  Downloading hash https://github.com/k3s-io/k3s/releases/download/v1.22.7+k3s1/sha256sum-amd64.txt
+[INFO]  Downloading binary https://github.com/k3s-io/k3s/releases/download/v1.22.7+k3s1/k3s
+[INFO]  Verifying binary download
+[INFO]  Installing k3s to /usr/local/bin/k3s
+[INFO]  Skipping installation of SELinux RPM
+[INFO]  Skipping /usr/local/bin/kubectl symlink to k3s, already exists
+[INFO]  Creating /usr/local/bin/crictl symlink to k3s
+[INFO]  Creating /usr/local/bin/ctr symlink to k3s
+[INFO]  Creating killall script /usr/local/bin/k3s-killall.sh
+[INFO]  Creating uninstall script /usr/local/bin/k3s-agent-uninstall.sh
+[INFO]  env: Creating environment file /etc/systemd/system/k3s-agent.service.env
+[INFO]  systemd: Creating service file /etc/systemd/system/k3s-agent.service
+[INFO]  systemd: Enabling k3s-agent unit
+Created symlink /etc/systemd/system/multi-user.target.wants/k3s-agent.service → /etc/systemd/system/k3s-agent.service.
+[INFO]  systemd: Starting k3s-agent
+```
+Enable the agent so that it can be started after reboot
+```
+sudo systemctl enable --now k3s-agent
+
+pnayak@rancher-server-1:~$ kubectl get nodes
+NAME               STATUS   ROLES                  AGE     VERSION
+rancher-worker-1   Ready    <none>                 3m51s   v1.22.7+k3s1
+rancher-server-1   Ready    control-plane,master   13m     v1.22.7+k3s1
+```
+
+To manually start the k3s agent we can also use the options --server and --token inetad of the environment variables:
+
+```
+k3s agent --server https://192.168.1.103:6443 --token "K1083efac7e33d2e594ca2756b121019986c795b52337bb4b86e9ed6d5d9eb3c683::server:8e2aff8512d6a673a31c0686f0a2eaf3"
+```
 
 ## Install Rancher on k3s
 
@@ -121,6 +179,14 @@ Now set "your own password" for the rancher server as shown
 Login to rancher server with "admin" as the username and "your-own-password", you should be able to login successfully.
 
 ![](/rancher/images/rancher-login-success.jpg)
+
+After login you can see the dashboard
+
+![](/rancher/images/local-cluster-dashboard.jpg)
+
+And
+
+![](/rancher/images/cluster-nodes-view.jpg)
 
 Now you can create more downstream kubernets clusters using rancher.
 
