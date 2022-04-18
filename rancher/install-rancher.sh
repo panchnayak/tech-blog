@@ -28,66 +28,15 @@ kubectl create namespace cattle-system
 kubectl label namespace cert-manager certmanager.k8s.io/disable-validation=true
 
 #Install Nginx Ingress
-cat > /var/lib/rancher/k3s/server/manifests/ingress-nginx.yaml <<EOF
-apiVersion: helm.cattle.io/v1
-kind: HelmChart
-metadata:
-  name: ingress-nginx
-  namespace: kube-system
-spec:
-  chart: ingress-nginx
-  repo: https://kubernetes.github.io/ingress-nginx
-  targetNamespace: ingress-nginx
-  set:
-  valuesContent: |-
-    fullnameOverride: ingress-nginx
-    ingressClassResource:
-        default: true
-    controller:
-      watchIngressWithoutClass: true
-      kind: DaemonSet
-      hostNetwork: true
-      hostPort:
-        enabled: true
-      service:
-        enabled: false
-      publishService:
-        enabled: false
-      metrics:
-        enabled: true
-        serviceMonitor:
-          enabled: true
-      config:
-        use-forwarded-headers: "true"
-EOF
+
+sudo cp ingress-nginx.yaml /var/lib/rancher/k3s/server/manifests/ingress-nginx.yaml
+
 
 #Install Cert-Manager
-cat > /var/lib/rancher/k3s/server/manifests/cert-manager.yaml <<EOF
-apiVersion: helm.cattle.io/v1
-kind: HelmChart
-metadata:
-  name: cert-manager
-  namespace: cert-manager
-spec:
-  repo: https://charts.jetstack.io
-  chart: cert-manager
-  targetNamespace: cert-manager
-  valuesContent: |
-    installCRDs: true
-EOF
+
+sudo cp cert-manager.yaml /var/lib/rancher/k3s/server/manifests/cert-manager.yaml
+
 
 #Install Rancher
-cat > /var/lib/rancher/k3s/server/manifests/rancher.yaml <<EOF
-apiVersion: helm.cattle.io/v1
-kind: HelmChart
-metadata:
-  name: rancher
-  namespace: cattle-system
-spec:
-  repo: https://releases.rancher.com/server-charts/latest
-  chart: rancher
-  targetNamespace: cattle-system
-  valuesContent: |
-    replicas: 1
-    hostname: $rancherHostName
-EOF
+
+sudo cp rancher.yaml /var/lib/rancher/k3s/server/manifests/rancher.yaml
