@@ -1,26 +1,28 @@
 # Installing Rancher on k3s - V2
 
-Here I am using VMware Fusion on my MAcbookPro to create and manage the VMs, you can use any virtualization software for your laptop or desktop.
+Here I am using VMware Fusion on my MAcbookPro to create and manage the VMs, you can use any virtualization software like VirtualBox for your laptop or desktop.
 
-![](images/vmware-fusion-vm.jpg)
+![](/rancher/images/vmware-fusion-vm.jpg)
 
-Clone your existing "CentOS 7" or "Ubuntu 20" VM on VirtualBox , Run the VM and Update the OS packages, you can install cockpit to update and install packages.
+Create a new VM or Clone your existing "CentOS 7" or "Ubuntu 20" VM on VirtualBox , Run the VM and Update the OS packages, you can install cockpit to update and install packages.
 
-For CentOS 7
+For CentOS-7
 ```
 sudo yum update -y
 sudo yum install -y cockpit
 ```
 
-for Ubuntu 20
+for Ubuntu-20
 
 ```
 sudo apt update
 sudo apt install -y cockpit
 ```
+Take a snapshot of the VM at this point, so that if you do anything wrong you can restore the state of the VM to this point.
+
 Access the VM web Interfase using the http//"ip-address":9090
 
-![](images/cockpit.jpg)
+![](/rancher/images/cockpit.jpg)
 
 ## Setting DNS for the VM
 
@@ -30,7 +32,7 @@ You can create a new NS record which points to "ns-aws.sslip.io." , this will ba
 
 IP_ADDRESS.bigopencloud.pnayak.com
 
-![](iamges/mydns.jpg)
+![](/rancher/iamges/mydns.jpg)
 
 ## Install HELM
 ```
@@ -38,7 +40,7 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scrip
 chmod 700 get_helm.sh
 ./get_helm.sh
 ```
-## Install lubernetes CLI ubectl
+## Install kubernetes CLI ubectl
 
 Download and install kubectl the Kubernetes CLI with whom you can communicate with Kubernetes Cluster
 
@@ -69,59 +71,3 @@ To test the config simple excute
 ```
 kubectl get nodes
 ```
-
-## Install Rancher on k3s
-
-We will install rancher and the required components by copying some formatted yaml files provided here to the /var/lib/rancher/k3s/server/manifests/ directory, in the k3s server, which tells k3s to set up the components we need (nginx-ingress, cert-manager, and rancher). These files are referred to as helm chart CRDs.
-
-Excute the given shell script in the repository.This will ask you to enter the DNS name for the rancher server. Enter the DNS name for the server as YOUR_VM_IP_ADDRESS.bigopencloud.pnayak.com or any other DNS name you want to give and the rest ll be done by the script.
-
-```
-./rancher/install-rancher.sh
-```
-Check the status of the pods
-```
-kubectl get pods --all-namespaces | grep helm
-
-pnayak@rancher-server:~$ kubectl get pods --all-namespaces | grep helm
-cert-manager                helm-install-cert-manager--1-g9k9k        0/1     Completed          0             16m
-cattle-system               helm-operation-dhxsx                      0/2     Completed          0             14m
-cattle-system               helm-operation-nx54x                      0/2     Completed          0             14m
-kube-system                 helm-install-ingress-nginx--1-7762k       0/1     Completed          4             16m
-cattle-system               helm-operation-dhr9k                      0/2     Completed          0             14m
-cattle-system               helm-install-rancher--1-wq9w7             0/1     CrashLoopBackOff   6 (53s ago)   7m1s
-```
-
-Wait for the Rancher server to be up and running,now the the following url on your local the browser
-https://IP_ADDRESS.bigopencloud.pnayak.com
-
-![](images/rancher-login-page.jpg)
-
-Get the bootstrap password by excuting the following
-```
-kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'
-```
-Copy the pawword and paste it on the browser as the bootstrap password
-```
-pnayak@rancher-server:~$ kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'
-6gp5fpqk9b7ffjlr2zd446v5b5gjv4vrztwz5bcjdrzpv8jq59f459
-```
-Now set "your own password" for the rancher server as shown 
-
-![](images/rancher-password.jpg)
-
-Login to rancher server with "admin" as the username and "your-own-password", you should be able to login successfully.
-
-![](images/rancher-login-success.jpg)
-
-## Uninstall k3s singlenode kubernetes cluster from the VM
-
-Igf you need to uninsatll the k3s Server from the VM you can do so just excuting the following command
-```
-sudo /usr/local/bin/k3s-uninstall.sh
-```
-
-
-
-
-

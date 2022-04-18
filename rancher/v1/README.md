@@ -1,24 +1,26 @@
 
 ## Installing Rancher on k3s - V1
 
-Here I am using VMware Fusion on my MAcbookPro to create and manage the VMs, you can use any virtualization software for your laptop or desktop.
+Here I am using VMware Fusion on my MAcbookPro to create and manage the VMs, you can use any virtualization software like VirtualBox for your laptop or desktop.
 
 ![](/rancher/images/vmware-fusion-vm.jpg)
 
-Clone your existing "CentOS 7" or "Ubuntu 20" VM on VirtualBox , Run the VM and Update the OS packages, you can install cockpit to update and install packages.
+Create a new VM or Clone your existing "CentOS 7" or "Ubuntu 20" VM on VirtualBox , Run the VM and Update the OS packages, you can install cockpit to update and install packages.
 
-For CentOS 7
+For CentOS-7
 ```
 sudo yum update -y
 sudo yum install -y cockpit
 ```
 
-for Ubuntu 20
+for Ubuntu-20
 
 ```
 sudo apt update
 sudo apt install -y cockpit
 ```
+Take a snapshot of the VM at this point, so that if you do anything wrong you can restore the state of the VM to this point.
+
 Access the VM web Interfase using the http//"ip-address":9090
 
 ![](/rancher/images/cockpit.jpg)
@@ -39,7 +41,7 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scrip
 chmod 700 get_helm.sh
 ./get_helm.sh
 ```
-## Install lubernetes CLI ubectl
+## Install kubernetes CLI ubectl
 
 Download and install kubectl the Kubernetes CLI with whom you can communicate with Kubernetes Cluster
 
@@ -121,7 +123,7 @@ I ll update this page again.Stay tuned.
 
 ## Uninstall k3s singlenode kubernetes cluster from the VM
 
-Igf you need to uninsatll the k3s Server from the VM you can do so just excuting the following command
+If you need to uninsatll the k3s Server from the VM you can do so just excuting the following command
 ```
 sudo /usr/local/bin/k3s-uninstall.sh
 ```
