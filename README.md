@@ -10,7 +10,7 @@ apt install -y cockpit
 ```
 Access the VM web Interfase using the http//"ip-address":9090
 
-![](cockpit.jpg)
+![](cockpit.jpg?raw=true)
 
 ## Setting DNS for the VM
 
@@ -20,7 +20,7 @@ You can create a new NS record which points to "ns-aws.sslip.io." , this will ba
 
 IP_ADDRESS.bigopencloud.pnayak.com
 
-![](mydns.jpg)
+![](mydns.jpg?raw=true)
 
 ## Install HELM
 ```
