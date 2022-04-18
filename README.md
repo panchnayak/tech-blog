@@ -2,11 +2,20 @@
 
 ## Installing Rancher on k3s
 
-Clone existing "Ubuntu 20" VM on VirtualBox , Run the VM and Update the OS packages, you can install cockpit to update and install packages
+Clone existing "CentOS 7" or "Ubuntu 20" VM on VirtualBox , Run the VM and Update the OS packages, you can install cockpit to update and install packages
+
+
+For CentOS 7
+```
+sudo yum update -y
+sudo yum install -y cockpit
+```
+
+for Ubuntu 20
 
 ```
-apt update
-apt install -y cockpit
+sudo apt update
+sudo apt install -y cockpit
 ```
 Access the VM web Interfase using the http//"ip-address":9090
 
@@ -86,8 +95,17 @@ https://IP_ADDRESS.bigopencloud.pnayak.com
 
 Get the bootstrap password by excuting the following
 ```
-sudo kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'
+kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'
 ```
+Copy the pawword and paste it on the browser as the bootstrap password
+```
+pnayak@rancher-server:~$ kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'
+6gp5fpqk9b7ffjlr2zd446v5b5gjv4vrztwz5bcjdrzpv8jq59f459
+```
+Now se your own password for the rancher server as shown 
+
+![](rancher-password.jpg)
+
 ## Uninstall k3s singlenode kubernetes cluster from the VM
 
 Igf you need to uninsatll the k3s Server from the VM you can do so just excuting the following command
