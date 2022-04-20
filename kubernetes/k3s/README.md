@@ -13,12 +13,24 @@ For CentOS-7
 sudo yum update -y
 sudo yum install -y cockpit
 ```
+Disbale the CentOS firewall,this is not recommended for production env.
+
+```
+sudo systemctl disable --now firewalld
+```
 for Ubuntu-20
 
 ```
 sudo apt update
 sudo apt install -y cockpit
 ```
+
+Disable the ubuntu OS firewall, this is not recommended for production env
+
+```
+sudo ufw disable
+```
+
 Take a snapshot of the VM at this point, so that if you do anything wrong you can restore the state of the VM to this point.
 
 Access the VM web Interfase using the http//IP_ADDRES:9090
@@ -37,17 +49,17 @@ Get the Kubernetes cluster details
 sudo k3s kubectl get nodes
 sudo k3s kubectl describe all
 ```
-If you dont want to excute the "k3s kubectl" and use the standard kubectl to communicate to the cluster do the following
+If you dont want to excute the "k3s kubectl" CLI for k3s and use the standard "kubectl" CLI to communicate to the cluster do the following
 
 ## Install kubernetes CLI kubectl
 
-Download and install kubectl the Kubernetes CLI with whom you can communicate with Kubernetes Cluster
+Download and install kubectl, to communicate with K3S Kubernetes Cluster
 ```
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
-sudo chown pnayak ~/.kube/config
+sudo chown $USER ~/.kube/config
 ```
 Now you can communicate to the k3s cluster using kubectl 
 

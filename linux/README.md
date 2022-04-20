@@ -14,13 +14,24 @@ For CentOS-7
 sudo yum update -y
 sudo yum install -y cockpit
 ```
+Disbale the CentOS firewall,this is not recommended for production env.
 
+```
+sudo systemctl disable --now firewalld
+```
 for Ubuntu-20
 
 ```
 sudo apt update
 sudo apt install -y cockpit
 ```
+
+Disable the ubuntu OS firewall, this is not recommended for production env
+
+```
+sudo ufw disable
+```
+
 Take a snapshot of the VM at this point, so that if you do anything wrong you can restore the state of the VM to this point.
 
 Access the VM web Interfase using the http//IP_ADDRESS:9090
