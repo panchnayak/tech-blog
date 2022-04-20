@@ -58,6 +58,10 @@ Download and install kubectl, to communicate with K3S Kubernetes Cluster
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+
+or
+
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 sudo chown $USER ~/.kube/config
 ```
