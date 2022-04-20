@@ -9,7 +9,7 @@ To know more about k3s visit https://k3s.io/
 
 Here I am using VMware Fusion on my MacbookPro to create and manage the VMs, you can use any virtualization software like VirtualBox for your laptop or desktop.
 
-![](/rancher/images/vmware-fusion-vm.jpg)
+![](/kubernetes/rancher/images/vmware-fusion-vm.jpg)
 
 * I ll not explain how to create the VM on VirtualBox of VMware workstation here.
 
@@ -31,7 +31,7 @@ Take a snapshot of the VM at this point, so that if you do anything wrong you ca
 
 Access the VM web Interfase using the http//IP_ADDRESS:9090
 
-![](/rancher/images/cockpit.jpg)
+![](/kubernetes/rancher/images/cockpit.jpg)
 
 ## Clone this repository
 
@@ -45,7 +45,7 @@ You can create a new NS record which points to "ns-aws.sslip.io." , this will ba
 
 IP_ADDRESS.bigopencloud.pnayak.com
 
-![](/rancher/iamges/mydns.jpg)
+![](/kubernetes/rancher/iamges/mydns.jpg)
 
 ## Install HELM
 ```
@@ -113,7 +113,7 @@ K10ae766aee26c6e3e645a4f1abf7e620ea43235e3a1b5c3f2fbc2958ec87f3aecc::server:e3b1
 Excute the following commands on the worker node VM terminal
 ```
 curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.103:6443 K3S_TOKEN="K10ae766aee26c6e3e645a4f1abf7e620ea43235e3a1b5c3f2fbc2958ec87f3aecc::server:e3b1f376bef51250d8b019971a75b96d" sh -
-
+```
 
 pnayak@rancher-worker-1:~$ curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.103:6443 K3S_TOKEN="K1083efac7e33d2e594ca2756b121019986c795b52337bb4b86e9ed6d5d9eb3c683::server:8e2aff8512d6a673a31c0686f0a2eaf3" sh -
 [sudo] password for pnayak:
@@ -134,16 +134,16 @@ pnayak@rancher-worker-1:~$ curl -sfL https://get.k3s.io | K3S_URL=https://192.16
 [INFO]  systemd: Enabling k3s-agent unit
 Created symlink /etc/systemd/system/multi-user.target.wants/k3s-agent.service → /etc/systemd/system/k3s-agent.service.
 [INFO]  systemd: Starting k3s-agent
-```
+
 Enable the agent so that it can be started after reboot
 ```
 sudo systemctl enable --now k3s-agent
-
+```
 pnayak@rancher-server-1:~$ kubectl get nodes
 NAME               STATUS   ROLES                  AGE     VERSION
 rancher-worker-1   Ready    <none>                 3m51s   v1.22.7+k3s1
 rancher-server-1   Ready    control-plane,master   13m     v1.22.7+k3s1
-```
+
 
 To manually start the k3s agent we can also use the options --server and --token inetad of the environment variables:
 
@@ -163,7 +163,7 @@ Excute the given shell script in the repository.This will ask you to enter the D
 Check the status of the pods
 ```
 kubectl get pods --all-namespaces | grep helm
-
+```
 pnayak@rancher-server:~$ kubectl get pods --all-namespaces | grep helm
 cert-manager                helm-install-cert-manager--1-g9k9k        0/1     Completed          0             16m
 cattle-system               helm-operation-dhxsx                      0/2     Completed          0             14m
@@ -171,37 +171,39 @@ cattle-system               helm-operation-nx54x                      0/2     Co
 kube-system                 helm-install-ingress-nginx--1-7762k       0/1     Completed          4             16m
 cattle-system               helm-operation-dhr9k                      0/2     Completed          0             14m
 cattle-system               helm-install-rancher--1-wq9w7             0/1     CrashLoopBackOff   6 (53s ago)   7m1s
-```
+
 
 Wait for the Rancher server to be up and running,now the the following url on your local the browser
 https://IP_ADDRESS.bigopencloud.pnayak.com
 
-![](/rancher/images/rancher-login-page.jpg)
+![](/kubernetes/rancher/images/rancher-login-page.jpg)
 
 Get the bootstrap password by excuting the following
 ```
 kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'
 ```
-Copy the pawword and paste it on the browser as the bootstrap password
+Copy the password and paste it on the browser as the bootstrap password
+```
+kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'
 ```
 pnayak@rancher-server:~$ kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'
 6gp5fpqk9b7ffjlr2zd446v5b5gjv4vrztwz5bcjdrzpv8jq59f459
-```
+
 Now set "your own password" for the rancher server as shown 
 
-![](/rancher/images/rancher-password.jpg)
+![](/kubernetes/rancher/images/rancher-password.jpg)
 
 Login to rancher server with "admin" as the username and "your-own-password", you should be able to login successfully.
 
-![](/rancher/images/rancher-login-success.jpg)
+![](/kubernetes/rancher/images/rancher-login-success.jpg)
 
 After login you can see the dashboard
 
-![](/rancher/images/local-cluster-dashboard.jpg)
+![](/kubernetes/rancher/images/local-cluster-dashboard.jpg)
 
 And
 
-![](/rancher/images/cluster-nodes-view.jpg)
+![](/kubernetes/rancher/images/cluster-nodes-view.jpg)
 
 Now you can create more downstream kubernets clusters using rancher.
 
