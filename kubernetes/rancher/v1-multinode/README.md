@@ -73,8 +73,6 @@ or with external postgres DB as follows
 
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--no-deploy traefik" sh -s - --datastore-endpoint="postgres://postgres:Abcd@1234@192.168.1.92:5432/k3s"
 
-
-
 ```
 Get the Kubernetes cluster details
 ```

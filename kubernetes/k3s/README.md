@@ -4,7 +4,7 @@ To know more about k3s visit https://k3s.io/
 
 Here I am using VMware Fusion on my MacbookPro to create and manage the VMs, you can use any virtualization software like VirtualBox for your laptop or desktop.
 
-![](/rancher/images/vmware-fusion-vm.jpg)
+![](/kubernetes/rancher/images/vmware-fusion-vm.jpg)
 
 * I ll not explain how to create the VM on VirtualBox of VMware workstation here.
 
@@ -22,9 +22,11 @@ Take a snapshot of the VM at this point, so that if you do anything wrong you ca
 
 Access the VM web Interfase using the http//IP_ADDRES:9090
 
+![](/kubernetes/rancher/images/cockpit.jpg)
+
 ## Install k3s, the lightweight Kubernetes, visit https://k3s.io/ to know more about k3s
 
-Install k3s server without the traefik ingress controller, we are going to install and use nginx ingress controller latter.
+Install k3s server .
 
 ```
 curl -sfL https://get.k3s.io | sh -
