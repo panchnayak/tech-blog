@@ -1,4 +1,9 @@
-In this tutorial I ll try to Compare some docker commanfs with kubernetes commands, so that one can understand how similar the kubectl commads are compared to docker commands.
+In this tutorial I ll try to compare some docker commands with kubernetes commands, if you are familiar with docker commands this will give you a perspective of kubectl command.
+
+then you can understand how similar and different the kubectl commands are compared to docker commands.
+While practicing you dont need to practice both docker and kubectl commands, this is for the comparision purpose.
+
+You can excute either docker or kubectl.
 
 ## Run a docker image using docker run
 
