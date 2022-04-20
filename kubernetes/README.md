@@ -1,4 +1,4 @@
-Running a docker image in kubernetes
+In this tutorial I ll try to Compare some docker commanfs with kubernetes commands, so that one can understand how similar the kubectl commads are compared to docker commands.
 
 ## Run a docker image using docker run
 
