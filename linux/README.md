@@ -3,7 +3,7 @@
 
 Here I am using VMware Fusion on my MacbookPro to create and manage the VMs, you can use any virtualization software like VirtualBox for your laptop or desktop.
 
-![](/rancher/images/vmware-fusion-vm.jpg)
+![](/linux/images/vmware-fusion-vm.jpg)
 
 * I ll explain here how to create the VM on VirtualBox of VMware workstation here.
 
@@ -25,4 +25,4 @@ Take a snapshot of the VM at this point, so that if you do anything wrong you ca
 
 Access the VM web Interfase using the http//IP_ADDRESS:9090
 
-![](/rancher/images/cockpit.jpg)
+![](/linux/images/cockpit.jpg)

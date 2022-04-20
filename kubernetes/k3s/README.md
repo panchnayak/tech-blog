@@ -18,6 +18,7 @@ for Ubuntu-20
 ```
 sudo apt update
 sudo apt install -y cockpit
+```
 Take a snapshot of the VM at this point, so that if you do anything wrong you can restore the state of the VM to this point.
 
 Access the VM web Interfase using the http//IP_ADDRES:9090
