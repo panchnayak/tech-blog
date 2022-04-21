@@ -1,5 +1,5 @@
 
-# Cresting Linux VMs on Virtual Box or Vmware Workstation
+# Creating Linux VMs on Virtual Box or Vmware Workstation
 
 Here I am using VMware Fusion on my MacbookPro to create and manage the VMs, you can use any virtualization software like VirtualBox for your laptop or desktop.
 
