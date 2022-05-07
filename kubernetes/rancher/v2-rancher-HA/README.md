@@ -63,6 +63,26 @@ createdb -h localhost -p 5432 -U postgres rancher-db
 \q 
 
  ```
+To allow remote connectiong to postgresql 
+```
+vi /etc/postgresql/12/main/pg_hba.conf 
+```
+
+Add the following line 
+
+host    all             all             all                      md5 
+or
+host    all             all             CIDR          md5 
+```
+vi /etc/postgresql/12/main/postgresql.conf 
+```
+
+Add the following line 
+```
+listen_addresses = '*'
+sudo systemctl restart postgresql 
+```
+
 ## Install HELM
 ```
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
