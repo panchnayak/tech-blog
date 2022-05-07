@@ -92,7 +92,7 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scrip
 chmod 700 get_helm.sh
 ./get_helm.sh
 ```
-## Install kubernetes CLI ubectl
+## Install kubernetes CLI kubectl
 
 Download and install kubectl the Kubernetes CLI with whom you can communicate with Kubernetes Cluster
 
@@ -107,6 +107,8 @@ sudo mv kubectl /usr/local/bin
 Install k3s server without the traefik ingress controller, we are going to install and use nginx ingress controller latter.
 ```
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--no-deploy traefik" sh -s -
+or
+curl -sfL https://get.k3s.io | sh -s - --datastore-endpoint="postgres://postgres:Abcd@1234@192.168.1.92:5432/k3s"
 ```
 Get the Kubernetes cluster details
 ```
