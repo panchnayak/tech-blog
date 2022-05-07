@@ -50,7 +50,8 @@ sudo apt install postgresql postgresql-contrib
 sudo systemctl enable --now  postgresql.service 
 sudo -i -u postgres 
 psql 
-createdb rancher-db 
+\q
+exit
 ```
 Change password
 ```
@@ -58,6 +59,8 @@ Change password
 ```
 
 Enter password as Abcd@1234 
+
+To create a database for rancher excute the following.
 ```
 createdb -h localhost -p 5432 -U postgres rancher-db 
 \q 
