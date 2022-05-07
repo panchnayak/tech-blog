@@ -25,6 +25,7 @@ for Ubuntu-20
 ```
 sudo apt update
 sudo apt install -y cockpit
+```
 Take a snapshot of the VM at this point, so that if you do anything wrong you can restore the state of the VM to this point.
 
 Access the VM web Interfase using the http//IP_ADDRES:9090
@@ -41,6 +42,27 @@ IP_ADDRESS.bigopencloud.pnayak.com
 
 ![](/rancher/iamges/mydns.jpg)
 
+## Install PostgreSQL
+```
+sudo apt update 
+sudo apt install postgres 
+sudo apt install postgresql postgresql-contrib 
+sudo systemctl enable --now  postgresql.service 
+sudo -i -u postgres 
+psql 
+createdb rancher-db 
+```
+Change password
+```
+\password postgres 
+```
+
+Enter password as Abcd@1234 
+```
+createdb -h localhost -p 5432 -U postgres rancher-db 
+\q 
+
+ ```
 ## Install HELM
 ```
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
