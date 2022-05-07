@@ -134,5 +134,8 @@ k3s-worker-1   Ready    <none>                 4m24s   v1.22.7+k3s1
 k3s-worker-2   Ready    <none>                 3m14s   v1.22.7+k3s1
 k3s-worker-3   Ready    <none>                 2m30s   v1.22.7+k3s1
 
-
+If you need to uninsatll the k3s Server from the VM you can do so just excuting the following command
+```
+sudo /usr/local/bin/k3s-uninstall.sh
+```
 

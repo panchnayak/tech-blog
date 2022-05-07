@@ -102,6 +102,50 @@ chmod +x kubectl
 sudo mv kubectl /usr/local/bin
 ```
 
+Create External Database,Here I am choosing PostgreSQL
+
+Create Another VM to Install PostgreSQL on it.
+After creating the VM run the following commands
+```
+sudo apt update
+sudo apt install postgres
+sudo -i -u postgres
+psql
+createdb kubernetes
+```
+Change the password
+```
+\password postgre
+```
+Create a new Database
+```
+createdb -h localhost -p 5432 -U postgres kubernetes
+\q
+```
+
+Or 
+```
+sudo -u postgres createdb kubernetes
+```
+To allow remote connectiong to postgresql
+```
+vi pg_hba.conf
+```
+Add the following line
+```
+host all all all md5
+vi postgresql.conf
+```
+Add the following line
+```
+listen_addresses = '*'
+```
+restart postgresql service
+```
+sudo systemctl restart postgresql
+```
+
+
 ## Install k3s, the lightweight Kubernetes
 
 Install k3s server without the traefik ingress controller, we are going to install and use nginx ingress controller latter.

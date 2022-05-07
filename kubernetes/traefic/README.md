@@ -1,3 +1,49 @@
+
+## Traefik Proxy 2.x Tutorial
+
+## Install k3s kubernetes cluster
+```
+curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+```
+## download kubectl and intall it.
+```
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+```
+### Describe the AddOns installed with k3s
+```
+kubectl describe AddOn traefik -n kube-system
+```
+
+➜  ~ kubectl describe AddOn traefik -n kube-system
+Name:         traefik
+Namespace:    kube-system
+Labels:       <none>
+Annotations:  <none>
+API Version:  k3s.cattle.io/v1
+Kind:         Addon
+Metadata:
+  Creation Timestamp:  2022-04-29T20:23:53Z
+  Generation:          2
+  Managed Fields:
+    API Version:  k3s.cattle.io/v1
+    Fields Type:  FieldsV1
+    fieldsV1:
+      f:spec:
+      f:status:
+    Manager:         deploy@rancher-server-1
+    Operation:       Update
+    Time:            2022-04-29T20:23:53Z
+  Resource Version:  383
+  UID:               298f5442-c4ae-40ca-b87c-3ba8ad7b2649
+Spec:
+  Checksum:  c7541e33cac61cf20483fd4327971fa2767c4522ab6fccca7102418d4e7bf76a
+  Source:    /var/lib/rancher/k3s/server/manifests/traefik.yaml
+Status:
+Events:  <none>
+
 pnayak@k3s-master-1:~$ kubectl -n kube-system get all
 NAME                                          READY   STATUS      RESTARTS   AGE
 pod/coredns-96cc4f57d-zbndr                   1/1     Running     0          9m50s
@@ -35,7 +81,8 @@ NAME                                 COMPLETIONS   DURATION   AGE
 job.batch/helm-install-traefik-crd   1/1           25s        10m
 job.batch/helm-install-traefik       1/1           25s        10m
 
-You see the traefic pod is created by default but traefic dashbard is not enabled by default so the ConfigMap for Traefik must be edited to enable the dashboard.
+
+### k3s configures Traefik Proxy to handle incoming HTTP and HTTPS requests and it also enables the API and the dashboard.
 
 ```
 kubectl -n kube-system describe deploy traefik
@@ -46,6 +93,7 @@ coredns                  1/1     1            1           17m
 local-path-provisioner   1/1     1            1           17m
 metrics-server           1/1     1            1           17m
 traefik                  1/1     1            1           16m
+
 pnayak@k3s-master-1:~$ kubectl -n kube-system describe deploy traefik
 Name:                   traefik
 Namespace:              kube-system
@@ -118,7 +166,27 @@ Events:
   Type    Reason             Age   From                   Message
   ----    ------             ----  ----                   -------
   Normal  ScalingReplicaSet  16m   deployment-controller  Scaled up replica set traefik-56c4b88c4b to 1
-  
+
+### Get the Traefik Proxy dashboard
 ```
-kubectl -n kube-system edit cm traefik
+kubectl port-forward -n kube-system deployment/traefik  9000:9000
+or
+kubectl port-forward -n kube-system "$(kubectl get pods -n kube-system| grep '^traefik-' | awk '{print $1}')" 9000:9000
 ```
+### The Traefik dashboard is now accessible at http://localhost:9000/dashboard/
+
+### Authentication
+
+### Create Kubernetes Secret
+
+```
+htpasswd -c auth pnayak
+kubectl create secret generic userssecret --from-file=auth -n dev
+```
+Apply the file to create the Middleware and Ingress
+
+```
+kubectl create -f whoami-auth.yaml
+```
+### TLS termination
+
