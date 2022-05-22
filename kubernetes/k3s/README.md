@@ -45,7 +45,7 @@ If you don't want to give readable permission to all for the KUBECONFIG file
 ```
 curl -sfL https://get.k3s.io | sh -
 ```
-or The above command will create a KUBECYNFIG file which is readable by all
+or The below command will create a KUBECONFIG file which is readable by all
 ```
 curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 ```

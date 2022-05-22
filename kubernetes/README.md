@@ -137,4 +137,3 @@ kubectl get po -l app=nginx-app
 kubectl delete deployment nginx-app
 kubectl get po -l app=nginx-app
 ```
-
