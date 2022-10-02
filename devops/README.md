@@ -11,35 +11,45 @@
 ### Coding
 
 [MS-Code]()
+
 [Git]()
 
 ### Build Tools
 [Maven]()
+
 [Graddle]()
 
 ### Testing Tools
 
 [JUnit]()
+
 [Sonarqube]()
+
 [Selenium]()
 
 ### CI Tools
 
 [Jenkins]()
+
 [GitLab]()
+
 [Teamcity]()
+
 [CircleCI]()
 
 
 ### Release Management Tools
 
 [Artifactory]()
+
 [Naxus]()
 
 ### Contineous Deployment Tools
 
 [Terraform]()
+
 [Ansible]()
+
 [Harness]()
 
 ### Deploment Platforms
@@ -53,11 +63,17 @@
 ### Monitiring Tools
 
 [Promethious]()
+
 [Grafana]()
+
 [AppDynamics]()
+
 [Dynatrace]()
+
 [NewRelics]()
+
 [ELK-Stack]()
+
 [Nagios]()
 
 ## DevOps Pipeline
