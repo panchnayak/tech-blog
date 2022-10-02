@@ -45,7 +45,10 @@
 ### Deploment Platforms
 
 [Docker](deployment/docker/README.md)
+
 [Kubernetes](deployment/kubernetes/README.md)
+
+[Linux-VM](/linux/README.md)
 
 ### Monitiring Tools
 
