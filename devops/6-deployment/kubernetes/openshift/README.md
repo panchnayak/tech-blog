@@ -31,7 +31,7 @@ Visit the following link and create an account if you dont have and login.
 
 https://console.redhat.com/openshift/
 
-![](/kubernetes/openshift/images/redhat-openshift-login.jpg)
+![](images/redhat-openshift-login.jpg)
 
 ## Procedure
 Create the install-config.yaml file.
@@ -143,17 +143,17 @@ pullSecret: '{"auths": ...}'
 
 Click the Cluster tab and client the create cluster button
 
-![](/kubernetes/openshift/images/redhat-openshift-create-cluster.jpg)
+![](images/redhat-openshift-create-cluster.jpg)
 
 Go to Run it Yourself Section and click the Cloud provider Installation options AWS (x86_64)
 
 Then Select an installation type , select "Installer-provisioned infrastructure" to Install OpenShift on AWS with installer-provisioned infrastructure User-provisioned infrastructure.
 
-![](/kubernetes/openshift/images/redhat-openshift-create-cluster-aws-installer-provisioned.jpg)
+![](images/redhat-openshift-create-cluster-aws-installer-provisioned.jpg)
 
 or "User-provisioned infrastructure" to install OpenShift on AWS with user-provisioned infrastructure
 
-![](/kubernetes/openshift/images/redhat-openshift-create-cluster-aws-user-privisioned.jpg)
+![](images/redhat-openshift-create-cluster-aws-user-privisioned.jpg)
 
 Visit the following Red Hat OpenShift on AWS guide
 

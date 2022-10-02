@@ -54,9 +54,9 @@
 
 ### Deploment Platforms
 
-[Docker](deployment/docker/README.md)
+[Docker](6-deployment/docker/README.md)
 
-[Kubernetes](deployment/kubernetes/README.md)
+[Kubernetes](6-deployment/kubernetes/README.md)
 
 [Linux-VM](/linux/README.md)
 
