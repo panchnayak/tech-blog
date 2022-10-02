@@ -1,0 +1,29 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: test-auth
+  namespace: dev
+spec:
+  basicAuth:
+    secret: userssecret
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: "whoami"
+  namespace: dev
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: dev-test-auth@kubernetescrd
+spec:
+  rules:
+    - host: myapp.127.0.0.1.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: whoami
+                port:
+                  number: 80
