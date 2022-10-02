@@ -46,5 +46,11 @@ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 \
 with Let's Encript certificate run the followinfg
 
 ```
-docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /opt/rancher:/var/lib/rancher --privileged rancher/rancher:latest --acme-domain cloud.bigopen.io
+docker run -d --restart=unless-stopped -p 80:80 -p 443:443 --privileged bigopencloud/bigopen:0.1
+
+or
+
+docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /opt/rancher:/var/lib/rancher --privileged bigopencloud/bigopen:0.1 --acme-domain domain-name.io
+
+
 ```

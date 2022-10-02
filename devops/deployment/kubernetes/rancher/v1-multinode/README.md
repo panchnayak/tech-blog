@@ -216,12 +216,7 @@ Now you can create more downstream kubernets clusters using rancher.
 
 I ll update this page again.Stay tuned.
 
-## Uninstall k3s singlenode kubernetes cluster from the VM
 
-If you need to uninsatll the k3s Server from the VM you can do so just excuting the following command
-```
-sudo /usr/local/bin/k3s-uninstall.sh
-```
 
 
 
