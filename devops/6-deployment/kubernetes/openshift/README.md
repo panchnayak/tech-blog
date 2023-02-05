@@ -33,6 +33,8 @@ https://console.redhat.com/openshift/
 
 ![](images/redhat-openshift-login.jpg)
 
+Download the pull Secret
+
 ## Procedure
 Create the install-config.yaml file.
 
