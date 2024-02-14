@@ -14,7 +14,7 @@ polly = session.client("polly")
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 model_engine = "text-davinci-003"
 
-while 'true':
+while(1):
     question = input("Ask Me Anything : ")
     completion = openai.Completion.create(
         engine=model_engine,

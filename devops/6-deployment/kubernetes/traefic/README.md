@@ -175,6 +175,17 @@ kubectl port-forward -n kube-system "$(kubectl get pods -n kube-system| grep '^t
 ```
 ### The Traefik dashboard is now accessible at http://localhost:9000/dashboard/
 
+If you want to access the dashboard using ingress then here is the way
+
+```
+kubectl config view
+export CLUSTERIP="Server IP"
+kubectl expose deploy/traefik -n kube-system --port=9000 --target-port=9000 --name=traefik-dashboard
+kubectl create ingress traefik-dashboard --rule="dashboard.traefik.$CLUSTERIP.sslip.io/*=traefik-dashboard:9000"
+curl -si http://dashboard.traefik.$CLUSTERIP.sslip.io/dashboard/ | head -n 1
+```
+### The Traefik dashboard is now accessible at http://dashboard.traefik.$CLUSTERIP.sslip.io/dashboard/
+
 ### Authentication
 
 ### Create Kubernetes Secret
