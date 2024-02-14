@@ -71,7 +71,7 @@ Access the VM web Interfase using the http//IP_ADDRES:9090
 
 ## Install k3s, the lightweight Kubernetes, visit https://k3s.io/ to know more about k3s
 
-Install k3s server .
+Install k3s server, without MYSQL External Database
 
 If you don't want to give readable permission to all for the KUBECONFIG file
 ```
